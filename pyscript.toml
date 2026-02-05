@@ -1,0 +1,13 @@
+name = "pEpitope Calculator"
+description = "Estimates vaccine efficacy/effectiveness by calculating the pEpitope distance between influenza vaccine and dominant circulating strains."
+
+packages = [
+    "biopython"
+]
+
+[files]
+"./src/__init__.py" = "./src/__init__.py"
+"./src/core.py" = "./src/core.py"
+"./src/calculation.py" = "./src/calculation.py"
+"./src/model.py" = "./src/model.py"
+"./src/utils.py" = "./src/utils.py"

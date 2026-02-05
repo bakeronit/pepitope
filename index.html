@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>pEpitope Calculator</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.1.1/core.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="https://pyscript.net/releases/2026.1.1/core.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>pEpitope Calculator</h1>
+            <p>Estimates vaccine efficacy/effectiveness by calculating the pEpitope distance between influenza vaccine
+                and dominant circulating strains.</p>
+            <small>A Python implementation of the MATLAB <a
+                    href="https://www.mathworks.com/matlabcentral/fileexchange/83698-pepitope-calculator">pEpitope
+                    Calculator</a></small>
+        </header>
+
+        <!-- Application Content -->
+        <main class="content">
+
+            <!-- Sequences Input -->
+            <fieldset class="section-sequences">
+                <legend>Hemagglutinin Sequences</legend>
+                <div class="input-group">
+                    <label for="dominant">Dominant Strain:</label>
+                    <textarea id="dominant" name="dominant" rows="5"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="vaccine">Vaccine Strain:</label>
+                    <textarea id="vaccine" name="vaccine" rows="5"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Configuration Row -->
+            <div class="split-row">
+                <!-- Vaccine Type -->
+                <fieldset class="section-type">
+                    <legend>Influenza Vaccine Type</legend>
+                    <div class="config-row">
+                        <span class="label-heading">Influenza A:</span>
+                        <div class="grid-2x2">
+                            <label><input type="radio" name="vaccine_type" value="h3n2" checked>A(H3N2)</label>
+                            <label><input type="radio" name="vaccine_type" value="h5n1" disabled>A(H5N1)</label>
+                            <label><input type="radio" name="vaccine_type" value="h1n2" disabled>A(H1N2)</label>
+                            <label><input type="radio" name="vaccine_type" value="h7n9" disabled>A(H7N9)</label>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <span class="label-heading">Influenza B:</span>
+                        <div class="grid-2x2">
+                            <label><input type="radio" name="vaccine_type" value="b-victoria"
+                                    disabled>B/Victoria</label>
+                            <label><input type="radio" name="vaccine_type" value="b-yamagata"
+                                    disabled>B/Yamagata</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Epidemiology Data -->
+                <fieldset class="section-data">
+                    <legend>Vaccine Epidemiology Data</legend>
+                    <div class="data-columns">
+                        <div class="column">
+                            <label><input type="radio" id="cdc" name="dataset" value="cdc" checked>CDC</label>
+                            <label><input type="radio" id="nh" name="dataset" value="nh">NH</label>
+                        </div>
+                        <div class="column">
+                            <label><input type="radio" id="efficacy" name="mode" value="efficacy" checked>Efficacy</label>
+                            <label><input type="radio" id="effectiveness" name="mode"
+                                    value="effectiveness">Effectiveness</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="calculate" disabled>Calculate</button>
+            </div>
+        </main>
+        <pre id="output">waiting...</pre>
+    </div>
+    <script type="py" src="./app.py" config="./pyscript.toml"></script>
+</body>
+
+</html>
