@@ -1,4 +1,3 @@
-import sys
 from Bio import SeqIO
     
 def clean_sequence(sequence):
@@ -14,10 +13,10 @@ def validate_sequence(sequence):
         print(f"Invalid characters in sequence: {', '.join(invalid_chr)}")
         return False
 
-def validate_fasta(input_fasta, web=False):
+def validate_fasta(input_fasta, from_string=False):
     fh = None
     try:
-        if web:
+        if from_string:
             from io import StringIO
             fh = StringIO(input_fasta)
         else:
@@ -32,7 +31,7 @@ def validate_fasta(input_fasta, web=False):
                     return False
             return True
     except IOError:
-        print(f"Error: The file could not be read.")
+        print("Error: The file could not be read.")
         return False
     except Exception as e:
         print(f"Error: {str(e)}, check if the file is in FASTA format.")
@@ -40,7 +39,7 @@ def validate_fasta(input_fasta, web=False):
 
 def format_result(inputs, results, format="txt"):
     if format == "txt":
-        result = f"pEpitope calculator result:\n" + "-"* 60 + "\n" + \
+        result = "pEpitope calculator result:\n" + "-"* 60 + "\n" + \
         f"Dominat strain: {inputs['name']}\n" + \
         f"Vaccine strain: {inputs['vaccine_name']}\n" + \
         f"Subtype: {inputs['subtype']}\n" + \

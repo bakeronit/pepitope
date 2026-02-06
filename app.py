@@ -1,9 +1,7 @@
 import asyncio
-from pyscript import when, document, fs
+from pyscript import when, document
 from src.core import generate_results
 from src.model import H3N2
-
-import tempfile
 
 btn = document.querySelector("#calculate")
 btn.disabled = False

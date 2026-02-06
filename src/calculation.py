@@ -13,4 +13,10 @@ def calculate_vaccine_efficacy(pepitope_score: float, params: dict) -> list[floa
     return [m * pepitope_score + b, sqrt(m_err ** 2 * pepitope_score ** 2 + b_err ** 2)]
 
 def extract_substitutions(epitope: list, vaccine_epitope: list) -> list[str]:
-    return [f"{a[-1]}{b[1:]}" for a, b in zip(epitope, vaccine_epitope) if a != b]
+    aa = [ e[-1] for e in epitope ]
+    vaccine = [ e[-1] for e in vaccine_epitope ]
+    if sum( letter == '-' for letter in aa ) / len(aa) > 0.1:
+        raise ValueError("Error: More than 10% of epitope positions are gaps in the dominant strain")
+    if sum( letter == '-' for letter in vaccine ) / len(vaccine) > 0.1:
+        raise ValueError("Error: More than 10% of epitope positions are gaps in the vaccine strain")
+    return [f"{b[-1]}{a[1:]}" for a, b in zip(epitope, vaccine_epitope) if a != b]

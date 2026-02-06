@@ -2,7 +2,7 @@ import typer
 from src import core
 
 def main(dominant_fasta: str, vaccine_fasta: str, vaccine_type: str = "H3N2", dataset: str = "CDC", mode: str = "Efficacy", outfmt: str = "txt"):
-    if not vaccine_type.upper() in ["H3N2"]:
+    if vaccine_type.upper() not in ["H3N2"]:
         raise ValueError("Invalid vaccine type")
     else:
         from src.model import H3N2

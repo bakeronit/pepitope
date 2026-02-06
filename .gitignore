@@ -8,3 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+
+# working unit-tests
+test/test_calculation.py
+test/test_core.py
+test/test_utils.py
