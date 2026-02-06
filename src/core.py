@@ -48,7 +48,7 @@ def get_epitope_aa(
             n_gap += 1
             target_positions = [ pos + 1 if pos >= align_pos else pos for pos in target_positions ]
             if align_pos >= min(target_positions) and align_pos <= max(target_positions):
-                raise ValueError("Error: A gap is in the epitope region of the alignment in the reference sequence.")
+                raise ValueError("a gap is in the epitope region of the alignment in the reference sequence.")
         elif align_pos in target_positions:
             if alignment[1][align_pos - align_start] == '-':
                 print("WARNING: A gap is in the epitope region of the alignment in the query sequence.")
@@ -56,6 +56,11 @@ def get_epitope_aa(
         elif align_pos > max(target_positions):
             break
 
+    if len(epitope_aa) < len(epitope_positions) * 0.5:
+        raise ValueError("less than half of the epitope positions are aligned. Maybe your sequence is too short.")
+    elif sum(s[-1] == '-' for s in epitope_aa) / len(epitope_aa) > 0.1:
+        raise ValueError("More than 10% of epitope positions are gaps in the query sequence.")
+    
     return epitope_aa
 
 

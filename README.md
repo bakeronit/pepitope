@@ -22,7 +22,7 @@ Requires Python 3.11+
 
 ```bash
 # Clone the repository
-git clone https://github.com/jiaZ/pepitope.git
+git clone https://github.com/bakeronit/pepitope.git
 cd pepitope
 
 # Install dependencies
