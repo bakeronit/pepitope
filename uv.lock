@@ -164,7 +164,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "biopython", specifier = "==1.85" },
+    { name = "biopython", specifier = ">=1.85" },
     { name = "typer", specifier = ">=0.21.1" },
 ]
 

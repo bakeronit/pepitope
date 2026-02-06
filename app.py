@@ -30,7 +30,7 @@ async def calculate(event) -> None:
             raise ValueError("Please enter a dominant sequence.")
         if not vaccine_sequence:
             raise ValueError("Please enter a vaccine sequence.")
-        results = generate_results(dominant_sequence, vaccine_sequence, model, dataset, mode, web=True)
+        results = generate_results(dominant_sequence, vaccine_sequence, model, dataset, mode, from_string=True)
         output.style.display = "block"
         output.textContent = results
     except Exception as e:

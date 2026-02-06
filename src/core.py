@@ -5,11 +5,13 @@ from .calculation import calculate_pepitope_score, calculate_vaccine_efficacy, e
 from .utils import validate_fasta, format_result
 
 import Bio    # v1.86 wheel is not available on Pydodide Micropip.
+#from packaging.version import Version
+# TODO: what if v1.87 is released? 
 if Bio.__version__ == "1.86":
     aligner = PairwiseAligner(
         mode="local"
     )
-elif Bio.__version__ == "1.85":    # biopython v1.86 changed the keys for these parameters and also changed the default value, so we need to specify them in v1.85 to match v1.86
+elif Bio.__version__ == "1.85":    # biopython v1.86 changed the keys for these parameters and also changed the default values, so we need to specify them in v1.85 to match v1.86
     aligner = PairwiseAligner(
         mode="local", 
         target_internal_open_gap_score = -1.000000,
@@ -26,7 +28,7 @@ elif Bio.__version__ == "1.85":    # biopython v1.86 changed the keys for these 
         query_right_extend_gap_score = -1.000000
     )
 else:
-    raise ValueError(f"Unsupported Biopython version: {Bio.__version__}")   # I only tested this two versions
+    raise ValueError(f"Unsupported Biopython version: {Bio.__version__}, supported versions: v1.85+")
 
 def get_optimal_alignment(seq, ref_seq):
     alignment = aligner.align(ref_seq, seq)[0]
@@ -106,7 +108,7 @@ def generate_results(dominant_fasta, vaccine_fasta, model, dataset, mode, outfmt
                 site : calculate_pepitope_score(epitopes[site], vaccine_epitopes[site])
                 for site in model.epitope_positions.keys()
             }
-            print(pepitope_scores)
+
             if all(score == 0 for score in pepitope_scores.values()):
                 dominant_epitope = "N/A"
                 max_pepitope_score = "0.0"
