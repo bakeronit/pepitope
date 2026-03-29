@@ -9,5 +9,5 @@ packages = [
 "./src/__init__.py" = "./src/__init__.py"
 "./src/core.py" = "./src/core.py"
 "./src/calculation.py" = "./src/calculation.py"
-"./src/model.py" = "./src/model.py"
 "./src/utils.py" = "./src/utils.py"
+"./src/models.py" = "./src/models.py"

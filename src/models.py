@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class VaccineType:
     subtype: str
@@ -14,6 +15,7 @@ class VaccineType:
 
     def __repr__(self):
         return self.__str__()
+
 
 H3N2 = VaccineType(
     subtype = "H3N2",
@@ -34,3 +36,13 @@ H3N2 = VaccineType(
         ("NH", "Effectiveness" ) : { "m": -2.6614, "m_err": 0.53525, "b": 0.57682, "b_err": 0.069455 }
     }
 )
+
+MODELS: dict[str, VaccineType] = {
+    "h3n2": H3N2,
+}
+
+def get_model(key: str) -> VaccineType:
+    model = MODELS.get(key.lower())
+    if model is None:
+        raise ValueError(f"Unsupported vaccine type: '{key}'. Available: {list(MODELS)}")
+    return model

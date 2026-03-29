@@ -40,7 +40,7 @@ def validate_fasta(input_fasta, from_string=False):
 def format_result(inputs, results, format="txt"):
     if format == "txt":
         result = "pEpitope calculator result:\n" + "-"* 60 + "\n" + \
-        f"Dominat strain: {inputs['name']}\n" + \
+        f"Dominant strain: {inputs['name']}\n" + \
         f"Vaccine strain: {inputs['vaccine_name']}\n" + \
         f"Subtype: {inputs['subtype']}\n" + \
         f"Dataset/Mode: {inputs['dataset']}/{inputs['mode']}\n\nResults\n" + \

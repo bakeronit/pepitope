@@ -98,6 +98,7 @@ def generate_results(dominant_fasta, vaccine_fasta, model, dataset, mode, outfmt
     else:
         dominant_fh = open(dominant_fasta, "r")
 
+    output = []
     with dominant_fh:
         for record in SeqIO.parse(dominant_fh, "fasta"):
             alignment = get_optimal_alignment(record, model.sequence)
@@ -122,7 +123,7 @@ def generate_results(dominant_fasta, vaccine_fasta, model, dataset, mode, outfmt
                 dominant_epitope = max(pepitope_scores, key=pepitope_scores.get)
                 max_pepitope_score = f"{pepitope_scores[dominant_epitope]:.6f}"
                 vaccine_efficacy, vaccine_efficacy_err = calculate_vaccine_efficacy(pepitope_scores[dominant_epitope], ve_params)
-                
+
             inputs = {
                 "name" : record.description,
                 "vaccine_name": vaccine_strain.description,
@@ -139,4 +140,8 @@ def generate_results(dominant_fasta, vaccine_fasta, model, dataset, mode, outfmt
                 "substitutions" : epitope_substitutions
             }
 
-            return format_result(inputs, results, outfmt)
+            output.append(format_result(inputs, results, outfmt))
+
+    if not output:
+        raise ValueError("No sequences found in dominant FASTA.")
+    return "\n\n".join(output) if outfmt == "txt" else f"[{', '.join(output)}]"

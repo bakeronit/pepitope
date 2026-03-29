@@ -30,11 +30,13 @@
                 <legend>Hemagglutinin Sequences</legend>
                 <div class="input-group">
                     <label for="dominant">Dominant Strain:</label>
-                    <textarea id="dominant" name="dominant" rows="5"></textarea>
+                    <textarea id="dominant" name="dominant" rows="6"
+                        placeholder=">A/strain_name/year&#10;MKTIIALSYIFCLVFA..."></textarea>
                 </div>
                 <div class="input-group">
                     <label for="vaccine">Vaccine Strain:</label>
-                    <textarea id="vaccine" name="vaccine" rows="5"></textarea>
+                    <textarea id="vaccine" name="vaccine" rows="6"
+                        placeholder=">A/vaccine_strain/year&#10;MKTIIALSYIFCLVFA..."></textarea>
                 </div>
             </fieldset>
 
@@ -48,7 +50,7 @@
                         <div class="grid-2x2">
                             <label><input type="radio" name="vaccine_type" value="h3n2" checked>A(H3N2)</label>
                             <label><input type="radio" name="vaccine_type" value="h5n1" disabled>A(H5N1)</label>
-                            <label><input type="radio" name="vaccine_type" value="h1n2" disabled>A(H1N2)</label>
+                            <label><input type="radio" name="vaccine_type" value="h1n1" disabled>A(H1N1)</label>
                             <label><input type="radio" name="vaccine_type" value="h7n9" disabled>A(H7N9)</label>
                         </div>
                     </div>
@@ -82,10 +84,14 @@
 
             <!-- Controls -->
             <div class="controls">
-                <button id="calculate" disabled>Calculate</button>
+                <button id="calculate" disabled>
+                    <span class="btn-spinner" id="btn-spinner" aria-hidden="true"></span>
+                    <span id="btn-label">Initializing…</span>
+                </button>
             </div>
         </main>
-        <pre id="output">waiting...</pre>
+
+        <div id="output"></div>
     </div>
     <script type="py" src="./app.py" config="./pyscript.toml"></script>
 </body>
